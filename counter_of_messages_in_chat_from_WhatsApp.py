@@ -12,11 +12,17 @@ patterns_for_time_by_name_of_language = {
     "english": r"([1-9]|(1[0-2]))/([1-9]|([12][0-9])|(3[01]))/\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
     "german": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
     "french": r"((0[1-9])|([12][0-9])|(3[01]))/((0[1-9])|(1[0-2]))/\d{4} à (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "spanish": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]"
+    "spanish": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]",
+    "afrikaans": r"\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([12][0-9])|(3[01])) ((1?[0-9])|(2[0-3])):[0-5][0-9]",
+    "albanian": r"([1-9]|([12][0-9])|(3[01]))\.([1-9]|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]",
+    "català": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2}, ((1?[0-9])|(2[0-3])):[0-5][0-9]"
 }
 if len(sys.argv) >= 3:
     pattern_for_time = patterns_for_time_by_name_of_language[sys.argv[2]]
 else:
+    languages_by_pattern_of_filename = {}
+    #match sys.argv[1]:
+    #    case re.match(
     pattern_for_time = patterns_for_time_by_name_of_language["english"]    
 def print_ID_with_assignment_to_corresponding_count_of_messages():
     for ID in counts_of_messages_by_ID.keys():

@@ -6,7 +6,7 @@ count_of_messages = 0
 IDs = set()
 counts_of_messages_by_ID = {}
 separator_between_time_and_ID = " - "
-pattern_for_time = r"(([1-9])|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} (([01][0-9])|(2[0-3])):[0-5][0-9]"
+pattern_for_time = r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]"
 for line in lines:
     signature = re.match(f"(?={pattern_for_time}{separator_between_time_and_ID}).+?(?=: .+)", line)
     if signature:

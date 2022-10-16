@@ -8,14 +8,38 @@ count_of_messages = 0
 IDs = set()
 counts_of_messages_by_ID = {}
 separator_between_time_and_ID = " - "
+patterns_as_regex_for_time_by_pattern_for_time = {
+    "M/D/YY, HH:MM": r"([1-9]|(1[0-2]))/([1-9]|([12][0-9])|(3[01]))/\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "DD.MM.YY, HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "DD/MM/YYYY à HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))/((0[1-9])|(1[0-2]))/\d{4} à (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "D/M/YY H:MM": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
+    "YYYY-MM-DD H:MM": r"\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([12][0-9])|(3[01])) ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
+    "D.M.YY, HH:MM": r"([1-9]|([12][0-9])|(3[01]))\.([1-9]|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "D/M/YY, H:MM": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2}, ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
+    "DD. MM. YYYY. HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))\. ((0[1-9])|(1[0-2]))\. \d{4}. (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "DD.MM.YY H:MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
+    "DD.MM.YYYY HH.MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{4} (([01][0-9])|(2[0-3])).[0-5][0-9]", 
+    "DD-MM-YYYY HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))-((0[1-9])|(1[0-2]))-\d{4} (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "DD.MM.YY HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2} (([01][0-9])|(2[0-3])):[0-5][0-9]", 
+    "D.M.YYYY klo H.MM": r"([1-9]|([12][0-9])|(3[01])).([1-9]|(1[0-2])).\d{4} klo ((1?[0-9])|(2[0-3])).[0-5][0-9]",
+    "DD/MM/YY, HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))/((0[1-9])|(1[0-2]))/\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]"
+}
 patterns_for_time_by_name_of_language = {
-    "english": r"([1-9]|(1[0-2]))/([1-9]|([12][0-9])|(3[01]))/\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "german": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "french": r"((0[1-9])|([12][0-9])|(3[01]))/((0[1-9])|(1[0-2]))/\d{4} à (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "spanish": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]",
-    "afrikaans": r"\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([12][0-9])|(3[01])) ((1?[0-9])|(2[0-3])):[0-5][0-9]",
-    "albanian": r"([1-9]|([12][0-9])|(3[01]))\.([1-9]|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]",
-    "català": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2}, ((1?[0-9])|(2[0-3])):[0-5][0-9]"
+    "english": patterns_as_regex_for_time_by_pattern_for_time["M/D/YY, HH:MM"], 
+    "german": patterns_as_regex_for_time_by_pattern_for_time["DD.MM.YY, HH:MM"], 
+    "french": patterns_as_regex_for_time_by_pattern_for_time["DD/MM/YYYY à HH:MM"], 
+    "spanish": patterns_as_regex_for_time_by_pattern_for_time["D/M/YY H:MM"], 
+    "afrikaans": patterns_as_regex_for_time_by_pattern_for_time["YYYY-MM-DD H:MM"], 
+    "albanian": patterns_as_regex_for_time_by_pattern_for_time["D.M.YY, HH:MM"], 
+    "catalan": patterns_as_regex_for_time_by_pattern_for_time["D/M/YY, H:MM"], 
+    "croatian": patterns_as_regex_for_time_by_pattern_for_time["DD. MM. YYYY. HH:MM"], 
+    "czech": patterns_as_regex_for_time_by_pattern_for_time["DD.MM.YY H:MM"], 
+    "danish": patterns_as_regex_for_time_by_pattern_for_time["DD.MM.YYYY HH.MM"], 
+    "dutch": patterns_as_regex_for_time_by_pattern_for_time["DD-MM-YYYY HH:MM"], 
+    "estonian": patterns_as_regex_for_time_by_pattern_for_time["DD.MM.YY HH:MM"], 
+    "filipino": patterns_as_regex_for_time_by_pattern_for_time["M/D/YY, HH:MM"], 
+    "finnish": patterns_as_regex_for_time_by_pattern_for_time["D.M.YYYY klo H.MM"], 
+    "italian": patterns_as_regex_for_time_by_pattern_for_time["DD/MM/YY, HH:MM"]
 }
 if len(sys.argv) >= 3:
     pattern_for_time = patterns_for_time_by_name_of_language[sys.argv[2]]

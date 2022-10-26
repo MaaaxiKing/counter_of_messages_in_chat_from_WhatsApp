@@ -8,21 +8,32 @@ count_of_messages = 0
 IDs = set()
 counts_of_messages_by_ID = {}
 separator_between_time_and_ID = " - "
+names_of_languages_in_use = ["english", "german", "french", "spanish", "afrikaans", "albanian", "catalan", "croatian", "czech", "danish", "dutch", "estonian", "filipino", "finnish", "italian"]
+patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time = {
+    "M": r"([1-9]|(1[0-2]))", 
+    "D": r"([1-9]|([12][0-9])|(3[01]))", 
+    "YY": r"\d{2}", 
+    "HH": r"(([01][0-9])|(2[0-3]))", 
+    "mm": r"[0-5][0-9]", #minutes, not 2-digit month; provisorical
+    "MM": r"((0[1-9])|(1[0-2]))", 
+    "YYYY": r"\d{4}", 
+    "H": r"((1?[0-9])|(2[0-3]))"
+}
 patterns_as_regex_for_time_by_pattern_for_time = {
-    "M/D/YY, HH:MM": r"([1-9]|(1[0-2]))/([1-9]|([12][0-9])|(3[01]))/\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "DD.MM.YY, HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "DD/MM/YYYY à HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))/((0[1-9])|(1[0-2]))/\d{4} à (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "D/M/YY H:MM": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
-    "YYYY-MM-DD H:MM": r"\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([12][0-9])|(3[01])) ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
-    "D.M.YY, HH:MM": r"([1-9]|([12][0-9])|(3[01]))\.([1-9]|(1[0-2]))\.\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "D/M/YY, H:MM": r"([1-9]|([12][0-9])|(3[01]))/([1-9]|(1[0-2]))/\d{2}, ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
-    "DD. MM. YYYY. HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))\. ((0[1-9])|(1[0-2]))\. \d{4}. (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "DD.MM.YY H:MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2} ((1?[0-9])|(2[0-3])):[0-5][0-9]", 
-    "DD.MM.YYYY HH.MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{4} (([01][0-9])|(2[0-3])).[0-5][0-9]", 
-    "DD-MM-YYYY HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))-((0[1-9])|(1[0-2]))-\d{4} (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "DD.MM.YY HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{2} (([01][0-9])|(2[0-3])):[0-5][0-9]", 
-    "D.M.YYYY klo H.MM": r"([1-9]|([12][0-9])|(3[01])).([1-9]|(1[0-2])).\d{4} klo ((1?[0-9])|(2[0-3])).[0-5][0-9]",
-    "DD/MM/YY, HH:MM": r"((0[1-9])|([12][0-9])|(3[01]))/((0[1-9])|(1[0-2]))/\d{2}, (([01][0-9])|(2[0-3])):[0-5][0-9]"
+    "M/D/YY, HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"M"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"D"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]}, {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD.MM.YY, HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]}, {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD/MM/YYYY à HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YYYY"]} à {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "D/M/YY H:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"D"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"M"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]} {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"H"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "YYYY-MM-DD H:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YYYY"]}-{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}-{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]} {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"H"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "D.M.YY, HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"D"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"M"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]}, {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "D/M/YY, H:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"D"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"M"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]}, {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"H"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD. MM. YYYY. HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}/. {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}/. {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YYYY"]}. {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}", 
+    "DD.MM.YY H:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]} {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"H"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD.MM.YYYY HH.MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YYYY"]} {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD-MM-YYYY HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}-{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}-{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YYYY"]} {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD.MM.YY HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]} {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "D.M.YYYY klo H.MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"D"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"M"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YYYY"]} klo {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"H"]}\.{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}", 
+    "DD/MM/YY, HH:MM": f"{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"DD"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"MM"]}/{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"YY"]}, {patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"HH"]}:{patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time[r"mm"]}"
 }
 patterns_for_time_by_name_of_language = {
     "english": patterns_as_regex_for_time_by_pattern_for_time["M/D/YY, HH:MM"], 

@@ -84,3 +84,6 @@ else:
     counts_of_messages_by_ID_sorted_by_count = dict(counts_of_messages_by_ID_sorted_by_count_as_list)
     for ID in counts_of_messages_by_ID_sorted_by_count.keys():
         print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")
+print("\r\nsorted lexicographically\r\n")
+for ID in counts_of_messages_by_ID_sorted_by_symbol_1_of_ID.keys():
+        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")

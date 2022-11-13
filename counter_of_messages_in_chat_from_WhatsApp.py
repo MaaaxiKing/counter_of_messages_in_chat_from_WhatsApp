@@ -71,12 +71,16 @@ for line in lines:
         IDs.add(ID)
         counts_of_messages_by_ID[ID] = 1 if not ID in counts_of_messages_by_ID.keys() else counts_of_messages_by_ID[ID] + 1
 print(f"{count_of_messages} messages overall")
-if counts_of_messages_by_ID == dict(sorted(counts_of_messages_by_ID.items(), key=lambda item: item[1])):
+counts_of_messages_by_ID_sorted_by_count_as_list = sorted(counts_of_messages_by_ID.items(), key=lambda item: item[1])
+counts_of_messages_by_ID_sorted_by_symbol_1_of_ID_as_list = sorted(counts_of_messages_by_ID.items(), key=lambda item: item[0])
+counts_of_messages_by_ID_sorted_by_symbol_1_of_ID = dict(sorted(counts_of_messages_by_ID.items(), key=lambda item: item[0]))
+if list(counts_of_messages_by_ID) == counts_of_messages_by_ID_sorted_by_count_as_list:
     print("\r\nsorted by first message and message count simultaneously\r\n")
     print_ID_with_assignment_to_corresponding_count_of_messages()
 else:
     print("\r\nsorted by first message\r\n")
     print_ID_with_assignment_to_corresponding_count_of_messages()
     print("\r\nsorted by message count\r\n")
-    for ID in counts_of_messages_by_ID.keys():
-        print(f"{ID}: {dict(sorted(counts_of_messages_by_ID.items(), key=lambda item: item[1]))[ID]} messages")
+    counts_of_messages_by_ID_sorted_by_count = dict(counts_of_messages_by_ID_sorted_by_count_as_list)
+    for ID in counts_of_messages_by_ID_sorted_by_count.keys():
+        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")

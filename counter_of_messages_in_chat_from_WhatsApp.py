@@ -15,6 +15,7 @@ patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time = {
     "YY": r"\d{2}", 
     "HH": r"(([01][0-9])|(2[0-3]))", 
     "mm": r"[0-5][0-9]", #minutes, not 2-digit month; provisorical
+    "DD": r"(([0-2][0-9])|(3[01]))", 
     "MM": r"((0[1-9])|(1[0-2]))", 
     "YYYY": r"\d{4}", 
     "H": r"((1?[0-9])|(2[0-3]))"

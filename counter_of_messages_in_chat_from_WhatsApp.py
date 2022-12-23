@@ -8,7 +8,7 @@ count_of_messages = 0
 IDs = set()
 counts_of_messages_by_ID = {}
 separator_between_time_and_ID = " - "
-names_of_languages_in_use = ["english", "german", "french", "spanish", "afrikaans", "albanian", "catalan", "croatian", "czech", "danish", "dutch", "estonian", "filipino", "finnish", "italian"]
+names_of_languages_supported = ["english", "german", "french", "spanish", "afrikaans", "albanian", "catalan", "croatian", "czech", "danish", "dutch", "estonian", "filipino", "finnish", "italian"]
 patterns_as_regex_for_element_of_time_by_abbreviation_for_element_of_time = {
     "M": r"([1-9]|(1[0-2]))", 
     "D": r"([1-9]|([12][0-9])|(3[01]))", 

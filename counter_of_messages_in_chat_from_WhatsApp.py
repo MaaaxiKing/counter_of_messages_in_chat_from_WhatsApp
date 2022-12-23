@@ -62,7 +62,7 @@ else:
     pattern_for_time = patterns_for_time_by_name_of_language["english"]    
 def print_ID_with_assignment_to_corresponding_count_of_messages(by):
     for ID in by.keys():
-        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")
+        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {round(counts_of_messages_by_ID[ID] / count_of_messages * 100, 2)} %")
 for line in lines:
     signature = re.match(f"(?={pattern_for_time}{separator_between_time_and_ID}).+?(?=: .+)", line)
     if signature:

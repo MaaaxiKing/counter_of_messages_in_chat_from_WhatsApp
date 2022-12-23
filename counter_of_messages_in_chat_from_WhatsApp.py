@@ -56,7 +56,7 @@ patterns_for_time_by_name_of_language = {
 if len(sys.argv) >= 3:
     pattern_for_time = patterns_for_time_by_name_of_language[sys.argv[2]]
 else:
-    languages_by_pattern_of_filename = {}
+    names_of_languages_by_pattern_of_default_filename = {}
     #match sys.argv[1]:
     #    case re.match(
     pattern_for_time = patterns_for_time_by_name_of_language["english"]    

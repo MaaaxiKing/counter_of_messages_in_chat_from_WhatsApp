@@ -60,9 +60,9 @@ else:
     #match sys.argv[1]:
     #    case re.match(
     pattern_for_time = patterns_for_time_by_name_of_language["english"]    
-def print_ID_with_assignment_to_corresponding_count_of_messages():
-    for ID in counts_of_messages_by_ID.keys():
-        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages")
+def print_ID_with_assignment_to_corresponding_count_of_messages(by):
+    for ID in by.keys():
+        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")
 for line in lines:
     signature = re.match(f"(?={pattern_for_time}{separator_between_time_and_ID}).+?(?=: .+)", line)
     if signature:
@@ -76,14 +76,12 @@ counts_of_messages_by_ID_sorted_by_symbol_1_of_ID_as_list = sorted(counts_of_mes
 counts_of_messages_by_ID_sorted_by_symbol_1_of_ID = dict(sorted(counts_of_messages_by_ID.items(), key=lambda item: item[0]))
 if list(counts_of_messages_by_ID) == counts_of_messages_by_ID_sorted_by_count_as_list:
     print("\r\nsorted by first message and message count simultaneously\r\n")
-    print_ID_with_assignment_to_corresponding_count_of_messages()
+    print_ID_with_assignment_to_corresponding_count_of_messages(counts_of_messages_by_ID)
 else:
     print("\r\nsorted by first message\r\n")
-    print_ID_with_assignment_to_corresponding_count_of_messages()
+    print_ID_with_assignment_to_corresponding_count_of_messages(counts_of_messages_by_ID)
     print("\r\nsorted by message count\r\n")
     counts_of_messages_by_ID_sorted_by_count = dict(counts_of_messages_by_ID_sorted_by_count_as_list)
-    for ID in counts_of_messages_by_ID_sorted_by_count.keys():
-        print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")
+    print_ID_with_assignment_to_corresponding_count_of_messages(counts_of_messages_by_ID_sorted_by_count)
 print("\r\nsorted lexicographically\r\n")
-for ID in counts_of_messages_by_ID_sorted_by_symbol_1_of_ID.keys():
-    print(f"{ID}: {counts_of_messages_by_ID[ID]} messages – {counts_of_messages_by_ID[ID] / count_of_messages * 100} %")
+print_ID_with_assignment_to_corresponding_count_of_messages(counts_of_messages_by_ID_sorted_by_symbol_1_of_ID)
